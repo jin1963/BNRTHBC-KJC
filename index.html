@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KJC/THBC Package DApp</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <!-- TOP BAR -->
+    <div class="top">
+      <div class="brand">
+        <div class="dot"></div>
+        <div class="h1">KJC/THBC – Package DApp</div>
+        <span class="pill mono" id="netPill">-</span>
+      </div>
+
+      <div class="row">
+        <button class="btn pink" id="btnConnect">Connect</button>
+        <span class="pill mono" id="wallet">-</span>
+        <a class="pill" id="walletScan" target="_blank" rel="noreferrer">BscScan</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT -->
+      <div class="card">
+        <div class="row" style="justify-content:space-between">
+          <div class="pill mono">CORE: <span id="coreText"></span></div>
+          <a class="pill" id="coreScan" target="_blank" rel="noreferrer">Core Scan</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <!-- BUY PANEL -->
+        <fieldset>
+          <div class="smallgrid">
+            <div>
+              <label>Package</label>
+              <select id="pkg"></select>
+            </div>
+            <div>
+              <label>Side</label>
+              <select id="side">
+                <option value="0">Left</option>
+                <option value="1">Right</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="smallgrid">
+            <div>
+              <label>Sponsor</label>
+              <input class="inp mono" id="sponsor" placeholder="0x..." />
+            </div>
+            <div>
+              <label>USDT Price</label>
+              <input class="inp mono" id="price" disabled />
+            </div>
+          </div>
+
+          <div class="smallgrid3">
+            <button class="btn" id="btnApprove">Approve USDT</button>
+            <button class="btn pink" id="btnBuy">Buy</button>
+            <button class="btn ghost" id="btnRefresh">Refresh</button>
+          </div>
+        </fieldset>
+
+        <div class="hr"></div>
+
+        <!-- BALANCE -->
+        <div class="kv"><div class="muted">USDT Balance</div><div class="v mono" id="usdtBal">-</div></div>
+        <div class="kv"><div class="muted">USDT Allowance</div><div class="v mono" id="usdtAllow">-</div></div>
+
+        <div class="hr"></div>
+
+        <!-- STATUS -->
+        <div class="kv"><div class="muted">My Rank</div><div class="v mono" id="myRank">-</div></div>
+        <div class="kv"><div class="muted">Status</div><div class="v mono" id="myStatus">-</div></div>
+
+        <div class="hr"></div>
+
+        <!-- NEED BUY MESSAGE (โชว์เมื่อ rank=0) -->
+        <div class="notice" id="needBuyBox" style="display:none">
+          <div class="pill mono" id="needBuyText">ต้องซื้อแพ็กเกจก่อน จึงจะสมัคร/ส่งลิงก์แนะนำได้</div>
+        </div>
+
+        <!-- REF LINKS (โชว์เมื่อ rank>0) -->
+        <div id="refBox" style="display:none">
+          <div class="row" style="justify-content:space-between;align-items:center">
+            <div class="pill">Referral Links</div>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="kv">
+            <div class="muted">Left</div>
+            <div class="v mono" id="refLeft" style="word-break:break-all">-</div>
+          </div>
+          <div class="smallgrid" style="margin-top:8px">
+            <button class="btn" id="btnCopyLeft">Copy Left Link</button>
+            <div class="pill mono" style="text-align:center">side=0</div>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="kv">
+            <div class="muted">Right</div>
+            <div class="v mono" id="refRight" style="word-break:break-all">-</div>
+          </div>
+          <div class="smallgrid" style="margin-top:8px">
+            <button class="btn" id="btnCopyRight">Copy Right Link</button>
+            <div class="pill mono" style="text-align:center">side=1</div>
+          </div>
+
+          <div class="hr"></div>
+        </div>
+
+        <!-- CLAIM -->
+        <div class="smallgrid">
+          <button class="btn" id="btnClaimRef">Claim Referral</button>
+          <button class="btn" id="btnClaimMatch">Claim Matching</button>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="kv"><div class="muted">Withdrawable</div><div class="v mono" id="withdrawable">-</div></div>
+        <div class="kv"><div class="muted">Accrued Ref</div><div class="v mono" id="accRef">-</div></div>
+        <div class="kv"><div class="muted">Accrued Match</div><div class="v mono" id="accMatch">-</div></div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card">
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <div class="pill">My Stakes</div>
+          <div class="pill mono">Count: <span id="stakeCount">0</span></div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="list" id="stakeList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</body>
+</html>
