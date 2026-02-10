@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>STCEx – Package DApp</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="dot"></div>
+        <div class="h1">STCEx – DApp</div>
+        <span class="pill mono" id="netPill">-</span>
+      </div>
+
+      <div class="row">
+        <button class="btn pink" id="btnConnect">Connect</button>
+        <span class="pill mono" id="wallet">-</span>
+        <a class="pill" id="walletScan" target="_blank" rel="noreferrer">BscScan</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT -->
+      <div class="card">
+        <div class="row" style="justify-content:space-between">
+          <div class="pill mono">CORE: <span id="coreText"></span></div>
+          <a class="pill" id="coreScan" target="_blank" rel="noreferrer">Core Scan</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <fieldset>
+          <div class="smallgrid">
+            <div>
+              <label>Package</label>
+              <select id="pkg"></select>
+            </div>
+            <div>
+              <label>Side</label>
+              <select id="side">
+                <option value="0">Left</option>
+                <option value="1">Right</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="smallgrid">
+            <div>
+              <label>Sponsor</label>
+              <input class="inp mono" id="sponsor" placeholder="0x..." />
+            </div>
+            <div>
+              <label>USDT Price</label>
+              <input class="inp mono" id="price" disabled />
+            </div>
+          </div>
+
+          <div class="smallgrid3">
+            <button class="btn" id="btnApprove">Approve USDT</button>
+            <button class="btn pink" id="btnBuy">Buy</button>
+            <button class="btn ghost" id="btnRefresh">Refresh</button>
+          </div>
+        </fieldset>
+
+        <div class="hr"></div>
+
+        <div class="kv"><div class="muted">USDT Balance</div><div class="v mono" id="usdtBal">-</div></div>
+        <div class="kv"><div class="muted">USDT Allowance</div><div class="v mono" id="usdtAllow">-</div></div>
+        <div class="kv"><div class="muted">My Rank</div><div class="v mono" id="myRank">-</div></div>
+
+        <div class="hr"></div>
+
+        <div class="smallgrid">
+          <button class="btn" id="btnClaimRef">Claim Referral</button>
+          <button class="btn" id="btnClaimMatch">Claim Matching</button>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="kv"><div class="muted">Withdrawable</div><div class="v mono" id="withdrawable">-</div></div>
+        <div class="kv"><div class="muted">Accrued Ref</div><div class="v mono" id="accRef">-</div></div>
+        <div class="kv"><div class="muted">Accrued Match</div><div class="v mono" id="accMatch">-</div></div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card">
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <div class="pill">My Stakes</div>
+          <div class="pill mono">Count: <span id="stakeCount">0</span></div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="list" id="stakeList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</body>
+</html>
